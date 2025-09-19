@@ -8,4 +8,4 @@ Para que se cumpla la relación de 1 a N, cada propiedad podrá tener un solo pr
 Las tablas están relacionadas mediante la clave foranea id_propiedad _fk que se encuentra en la tabla propietarios y la clave primaria id_propiedad que se encuentra en la tabla propiedades.
 
 ## Diagrama de bases de datos
-![Diagrama de bases de datps](https://github.com/MaiteKuhn/TPE_WEB2_2025/blob/main/tabla_de_relaciones-TPE.png)
+![Diagrama de bases de datps](https://github.com/MaiteKuhn/TPE_WEB2_2025/blob/main/tabla_db_propiedades.png?raw=true)
