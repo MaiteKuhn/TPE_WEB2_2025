@@ -1,6 +1,6 @@
 <?php
 require_once './config/config.php';
-public class ModeloPropietario {
+class ModeloPropietario {
     private $db;
 
     public function __construct() {
