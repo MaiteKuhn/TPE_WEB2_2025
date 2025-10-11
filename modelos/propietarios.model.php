@@ -24,7 +24,7 @@ class ModeloPropietario {
         $query->execute([$nombre, $telefono, $mail]);
     }
 
-    public function editarPropietario($id_usuario, $nombre, $telefono, $mail) {
+    public function editarPropietario($id_propietario, $nombre, $telefono, $mail) {
         $query = $this->db->prepare('UPDATE propietarios SET nombre = ?, telefono = ?, email = ? WHERE id_propietario = ?');
         $query->execute([$nombre, $telefono, $mail, $id_propietario]);
     }
