@@ -1,6 +1,6 @@
 <?php
-require_once './modelos/ModeloPropiedades.phtml';
-require_once './vistas/VistaPropiedades.phtml';
+require_once './modelos/ModeloPropiedades.php';
+require_once './vistas/VistaPropiedades.php';
 
 class ControladorPropiedades {
     private $modelo;
@@ -51,7 +51,7 @@ class ControladorPropiedades {
 
 
     //Editar propiedad
-    public function editarPropidad($id_propiedad) {
+    public function editarPropiedad($id_propiedad) {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_propietario = $_POST['id_propietario_fk'];
             $tipo_propiedad = $_POST['tipo_propiedad'];
@@ -69,7 +69,7 @@ class ControladorPropiedades {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_propiedad = $_POST['id_propiedad'];
             $this->modelo->eliminarPropiedad($id_propiedad);
-            header('Location:' . BASE_URL . 'propiedad');
+            header('Location:' . BASE_URL . 'propiedades');
             exit();
             } else {
                 $this->vista->mostrarErrorEliminar();
