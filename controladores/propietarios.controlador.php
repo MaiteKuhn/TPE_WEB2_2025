@@ -1,6 +1,6 @@
 <?php
-require_once './modelos/ModeloPropietario.php';
-require_once './vistas/VistaPropietario.php';
+require_once './modelos/propietarios.model.php';
+require_once './vistas/propietarios.vistas.php';
 
 class ControladorPropietario {
     private $modelo;
@@ -8,7 +8,7 @@ class ControladorPropietario {
 
     public function __construct() {
         $this->modelo = new ModeloPropietario();
-        $this->vista = new VistaPropietario(); 
+        $this->vista = new VistasPropietario(); 
     }
 
     public function mostrarPropietarios() {

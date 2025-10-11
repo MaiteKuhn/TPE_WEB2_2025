@@ -1,5 +1,5 @@
 <?php
-require_once './modelo/usuario.modelo.php';
+require_once './modelo/auth.model.php';
 require_once './vistas/auth.vista.php';
 
 class AuthController {

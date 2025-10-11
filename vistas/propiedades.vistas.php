@@ -3,15 +3,16 @@ class VistaPropiedades {
     public function __construct() {}
 
     public function mostrarPropiedades($propiedades){
-
+         require_once './templates/listar_propiedades.phtml';
     }
 
     public function formularioAgregarPropiedad(){
+         require_once './templates/form_agregar_propiedades.phtml';
 
     }
 
     public function forumularioEditarPropiedad($propiedad){
-
+         require_once './templates/form_editar_propiedades.phtml';
     }
 
     public function mostrarErrorEditar( $id_propiedad){

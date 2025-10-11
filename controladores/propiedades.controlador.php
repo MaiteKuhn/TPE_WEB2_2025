@@ -1,6 +1,6 @@
 <?php
-require_once './modelos/ModeloPropiedades.php';
-require_once './vistas/VistaPropiedades.php';
+require_once './modelos/propiedades.model.php';
+require_once './vistas/propiedades.vistas.php';
 
 class ControladorPropiedades {
     private $modelo;
@@ -35,7 +35,8 @@ class ControladorPropiedades {
             header('Location: ' . BASE_URL . 'propiedades');
             exit();
         } else {
-            $this->vista->formularioAgregarPropiedad();
+            $propietarios = $this->modelo->obtenerPropietarios();
+            $this->vista->formularioAgregarPropiedad($propietarios);
         }
     }
 

@@ -1,8 +1,10 @@
 <?php
-require_once './controladores/ControladorPropietario.php';
-require_once './controladores/ModeloPropietario.php';
-require_once './controladores/AuthController.php';
-require_once './controladores/ControladorPropiedades.php';
+require_once './controladores/propietarios.controlador.php';
+require_once './controladores/propietarios.model.php';
+require_once './controladores/auth.controlador.php';
+require_once './controladores/auth.model.php';
+require_once './controladores/propiedades.controlador.php';
+require_once './controladores/propiedades.model.php';
 require_once './middleware/session.middleware.php';
 require_once './middleware/guard.middleware.php';
 
