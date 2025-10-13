@@ -30,7 +30,7 @@ $params = explode('/', $action);
 
 switch ($params[0]) {
     case 'home':
-        # code...
+      
         break;
     case 'login':
         $controlador = new AuthController();
@@ -41,6 +41,10 @@ switch ($params[0]) {
         $controlador->doLogin($request);
         break;
     case 'propiedades':
+        $controlador = new ControladorPropiedades();
+        $controlador->mostrarPropiedades($request);
+        break;
+    case 'detallePropiedad':
         $controlador = new ControladorPropiedades();
         $controlador->mostrarPropiedades($request);
         break;

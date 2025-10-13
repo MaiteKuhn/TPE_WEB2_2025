@@ -11,10 +11,23 @@ class ControladorPropiedades {
         $this->vista = new VistaPropiedades(); 
     }
 
-    public function mostrarPropiedades() {
+    public function mostrarPropiedades($request = null) {
         $propiedades = $this->modelo->obtenerPropiedades();
-        $this->vista->mostrarPropiedades($propiedades);
+        $usuario = null;
+        if ($request && isset($request->user) && $request->user != null) {
+            $usuario = $request->user;
+        }
+        $this->vista->mostrarPropiedades($propiedades, $usuario);
     }
+
+    public function mostrarPropiedadPorId() {
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id_propiedad = $_POST['id_propiedad'];
+        }
+        $propiedades = $this->modelo->obtenerPropiedadPorId($id_propiedad);
+        $this->vista->mostrarPropiedadPorId($id_propiedad);
+    }
+
 
     public function agregarPropiedad() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {

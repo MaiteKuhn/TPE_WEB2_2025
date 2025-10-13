@@ -6,6 +6,7 @@ class AuthController {
     private $modelo;
     private $vista;
 
+
     function __construct() {
         $this->modelo = new ModeloAuth();
         $this->vista = new VistaAuth();
@@ -20,18 +21,20 @@ class AuthController {
             return $this->vista->mostrarLogin("Faltan datos obligatorios", $request->user);
         }
 
-        $user = $_POST['usuario'];
+        $usuario = $_POST['usuario'];
         $password = $_POST['password'];
 
-        $userFromDB = $this->modelo->getByUser($user);
+        $userFromDB = $this->modelo->getByUser($usuario);
 
-        if($userFromDB && password_verify($password, $userFromDB->password)) {
+
+        //aca usar password verify
+        if ($userFromDB && $password === $userFromDB->password) {
             $_SESSION['USER_ID'] = $userFromDB->id;
             $_SESSION['USER_NAME'] = $userFromDB->usuario;
-            header("Location: ".BASE_URL."listar");
+            header("Location: ".BASE_URL."propiedades");
             return;
         } else {
-            return $this->vista->mostrarLogin("Usuario o contraseña incorrecta", $request->user);
+            return $this->vista->mostrarLogin("Usuario o contraseña incorrecta", $request->usuario);
         }
     }
 }    

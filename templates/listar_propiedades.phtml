@@ -1,0 +1,121 @@
+<?php
+if (!isset($usuario)) {
+    $usuario = null;
+}
+require 'templates/header.phtml';
+?>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+<style>
+    .prop-cards-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .prop-cards-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        width: 100%;
+    }
+    .prop-card {
+        background: #fff;
+        border: 1.5px solid #0033a0;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        min-width: 270px;
+        max-width: 320px;
+        padding: 24px 20px 18px 20px;
+        margin-bottom: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .prop-card h5 {
+        color: #d32f2f;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    .prop-card strong {
+        color: #0033a0;
+    }
+    .prop-card .btn {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 600;
+        border-radius: 5px;
+        margin-right: 8px;
+        margin-top: 8px;
+        font-size: 0.98em;
+    }
+    .btn-ver-detalle {
+        background: #0033a0;
+        color: #fff;
+        border: 2px solid #0033a0;
+        transition: background 0.2s, color 0.2s;
+        text-decoration: none;
+        padding: 7px 16px;
+    }
+    .btn-ver-detalle:hover {
+        background: #fff;
+        color: #0033a0;
+    }
+    .btn-editar {
+        background: #fff3cd;
+        color: #856404;
+        border: 2px solid #ffe082;
+        padding: 7px 14px;
+        text-decoration: none;
+    }
+    .btn-eliminar {
+        background: #d32f2f;
+        color: #fff;
+        border: 2px solid #d32f2f;
+        padding: 7px 14px;
+        text-decoration: none;
+    }
+    .btn-agregar-prop {
+        background: #0033a0;
+        color: #fff;
+        border: 2px solid #0033a0;
+        border-radius: 5px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 600;
+        font-size: 1.05em;
+        padding: 10px 22px;
+        margin-bottom: 28px;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+        display: inline-block;
+    }
+    .btn-agregar-prop:hover {
+        background: #fff;
+        color: #0033a0;
+    }
+</style>
+
+<div class="prop-cards-container">
+    <?php if (isset($usuario) && $usuario): ?>
+        <a href="<?= BASE_URL ?>formAgregarPropiedad" class="btn-agregar-prop">Agregar Propiedad</a>
+    <?php endif; ?>
+    <div class="prop-cards-row">
+        <?php foreach ($propiedades as $propiedad): ?>
+            <div class="prop-card">
+                <h5><?= htmlspecialchars($propiedad->tipo_propiedad) ?></h5>
+                <div style="margin-bottom: 10px;">
+                    <strong>Ubicación:</strong> <?= htmlspecialchars($propiedad->ubicacion) ?><br>
+                    <strong>Habitaciones:</strong> <?= htmlspecialchars($propiedad->habitaciones) ?>
+                </div>
+                <a href="<?= BASE_URL ?>detallePropiedad/<?= $propiedad->id_propiedad ?>" class="btn btn-ver-detalle">Ver detalle</a>
+                <?php if (isset($usuario) && $usuario): ?>
+                    <a class="btn btn-editar" href="<?= BASE_URL ?>editarPropiedad/<?= $propiedad->id_propiedad ?>">Editar</a>
+                    <a class="btn btn-eliminar" href="<?= BASE_URL ?>eliminarPropiedad/<?= $propiedad->id_propiedad ?>">Eliminar</a>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<?php require 'templates/footer.phtml' ?>
