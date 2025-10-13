@@ -14,7 +14,7 @@ class ModeloPropiedades {
     }
 
     public function obtenerPropietarios() {
-    $query = $this->db->prepare("SELECT id, nombre FROM propietarios");
+    $query = $this->db->prepare("SELECT id_propietario, nombre FROM propietarios");
     $query->execute();
     return $query->fetchAll(PDO::FETCH_OBJ);
 }
@@ -30,13 +30,13 @@ class ModeloPropiedades {
         $query->execute([$id_propietario, $tipo_propiedad, $ubicacion, $habitaciones, $metros_cuadrados]);
     }
 
-    public function editarPropiedad($id_propiedad, $id_propietario, $tipo_propiedad, $ubicacion, $habitaciones, $metros_cuadrados) {
-        $query = $this->db->prepare('UPDATE propiedades SET id_propietario_fk = ?, tipo_propiedad = ?, ubicacion = ?, habitaciones = ?, metros_cuadrados = ? WHERE id_propiedad = ?');
-        $query->execute([$id_propiedad, $id_propietario, $tipo_propiedad, $ubicacion, $habitaciones, $metros_cuadrados]);
-    }
+   public function editarPropiedad($id_propiedad, $id_propietario, $tipo_propiedad, $ubicacion, $habitaciones, $metros_cuadrados) {
+    $query = $this->db->prepare('UPDATE propiedades SET id_propietario_fk = ?, tipo_propiedad = ?, ubicacion = ?, habitaciones = ?, metros_cuadrados = ? WHERE id_propiedad = ?');
+    $query->execute([$id_propietario, $tipo_propiedad, $ubicacion, $habitaciones, $metros_cuadrados, $id_propiedad]);
+}
 
     public function eliminarPropiedad($id_propiedad) {
-        $query = $this->db->prepare('DELETE FROM propiedad WHERE id_propiedad = ?');
+        $query = $this->db->prepare('DELETE FROM propiedades WHERE id_propiedad = ?');
         $query->execute([$id_propiedad]);
     }
 }

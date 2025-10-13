@@ -97,21 +97,24 @@ require 'templates/header.phtml';
 </style>
 
 <div class="prop-cards-container">
-    <?php if (isset($usuario) && $usuario): ?>
-        <a href="<?= BASE_URL ?>formAgregarPropiedad" class="btn-agregar-prop">Agregar Propiedad</a>
+    <?php if (!empty($usuario)): ?>
+        <a href="<?= BASE_URL ?>agregarPropiedad/" class="btn-agregar-prop">Agregar Propiedad</a>
     <?php endif; ?>
+
     <div class="prop-cards-row">
         <?php foreach ($propiedades as $propiedad): ?>
             <div class="prop-card">
-                <h5><?= htmlspecialchars($propiedad->tipo_propiedad) ?></h5>
-                <div style="margin-bottom: 10px;">
+             <h5><?= htmlspecialchars($propiedad->tipo_propiedad) ?></h5>
+             <div style="margin-bottom: 10px;">
                     <strong>Ubicación:</strong> <?= htmlspecialchars($propiedad->ubicacion) ?><br>
                     <strong>Habitaciones:</strong> <?= htmlspecialchars($propiedad->habitaciones) ?>
                 </div>
                 <a href="<?= BASE_URL ?>detallePropiedad/<?= $propiedad->id_propiedad ?>" class="btn btn-ver-detalle">Ver detalle</a>
-                <?php if (isset($usuario) && $usuario): ?>
+               <?php if (!empty($usuario)): ?>
+                <form action="<?= BASE_URL ?>eliminarPropiedad/<?= $propiedad->id_propiedad ?>" method="POST" style="display:inline-block;">
+                        <button type="submit" class="btn btn-eliminar">Eliminar</button>
+                    </form>
                     <a class="btn btn-editar" href="<?= BASE_URL ?>editarPropiedad/<?= $propiedad->id_propiedad ?>">Editar</a>
-                    <a class="btn btn-eliminar" href="<?= BASE_URL ?>eliminarPropiedad/<?= $propiedad->id_propiedad ?>">Eliminar</a>
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>

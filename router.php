@@ -30,7 +30,8 @@ $params = explode('/', $action);
 
 switch ($params[0]) {
     case 'home':
-      
+        $controlador = new ControladorPropiedades();
+        $controlador->mostrarPropiedades($request);
         break;
     case 'login':
         $controlador = new AuthController();
@@ -46,14 +47,19 @@ switch ($params[0]) {
         break;
     case 'detallePropiedad':
         $controlador = new ControladorPropiedades();
-        $controlador->mostrarPropiedades($request);
+         $id = $params[1] ?? null;
+        if ($id) {
+            $controlador->mostrarPropiedadPorId($id);
+        } else {
+            echo "Propiedad no encontrada";
+        }
         break;
     case 'agregarPropiedad':
         $request = (new GuardMiddleware())->run($request);
         $controlador = new ControladorPropiedades();
         $controlador->agregarPropiedad($request);
         break;
-    case 'editarPropiedad':
+   case 'editarPropiedad':
         $request = (new GuardMiddleware())->run($request);
         $controlador = new ControladorPropiedades();
         $id = $params[1] ?? null;
@@ -62,12 +68,14 @@ switch ($params[0]) {
     case 'eliminarPropiedad':
         $request = (new GuardMiddleware())->run($request);
         $controlador = new ControladorPropiedades();
-        $request->id = $params[1];
-        $controlador->eliminarPropiedad($request);
+        $id = $params[1] ?? null;
+        if ($id) {
+            $controlador->eliminarPropiedad($id);
+        } else {
+            echo "ID de propiedad no proporcionado";
+        }
         break;
-
-                
-                
-
-
+    default:
+            echo "Página no encontrada";
+            break;
 }

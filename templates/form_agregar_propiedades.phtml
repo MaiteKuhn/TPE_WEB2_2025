@@ -60,11 +60,11 @@
             <select id="id_propietario_fk" name="id_propietario_fk" required>
                 <option value="">Seleccione un propietario</option>
                 <?php foreach($propietarios as $propietario): ?>
-                    <option value="<?= $propietario->id ?>">
+                    <option value="<?= $propietario->id_propietario ?>">
                         <?= htmlspecialchars($propietario->nombre) ?>
                     </option>
-                <?php endforeach; ?>
-            </select>
+    <?php endforeach; ?>
+</select>
         </div>
         <div class="form-group">
             <label for="tipo_propiedad">Tipo de propiedad</label>
