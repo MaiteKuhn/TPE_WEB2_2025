@@ -20,7 +20,7 @@ class ModeloPropiedades {
 }
 
     public function obtenerPropiedadPorId($id_propiedad) {
-        $query = $this->db->prepare('SELECT * FROM propietarios WHERE id_propiedad = ?');
+        $query = $this->db->prepare('SELECT * FROM propiedades WHERE id_propiedad = ?');
         $query->execute([$id_propiedad]);
         return $query->fetch(PDO::FETCH_OBJ);
     }

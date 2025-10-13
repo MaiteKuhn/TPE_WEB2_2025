@@ -16,13 +16,6 @@ class ControladorPropiedades {
         $this->vista->mostrarPropiedades($propiedades);
     }
 
-   /* public function mostrarPropiedades($id_propietario){//de uno especifico
-        $propiedades = $this->modelo->obtenerPropiedadesPorPropietario($id_propietario);
-        $propietario = $this->modelo->obtenerPropietarioPorId($id_propietario);
-        $this->vista->mostrarPropiedadesPorPropietario($propietario, $propiedades);
-    }*/
-
-    //Form agregar propiedad
     public function agregarPropiedad() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_propietario = $_POST['id_propietario_fk'];
@@ -40,18 +33,6 @@ class ControladorPropiedades {
         }
     }
 
-    //Form editar propiedad
-    public function mostrarForumularioEditarPropiedad($id_propiedad) {
-        $propiedad = $this->modelo->obtenerPropiedadPorId($id_propiedad);
-        if($propiedad) {
-            $this->vista->forumularioEditarPropiedad($propiedad);
-        } else {
-            $this->vista->mostrarErrorEditar("No se encontro propiedad con el ID: " . $id_propiedad);
-        }
-    }
-
-
-    //Editar propiedad
     public function editarPropiedad($id_propiedad) {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id_propietario = $_POST['id_propietario_fk'];
@@ -62,9 +43,12 @@ class ControladorPropiedades {
             $this->modelo->editarPropiedad($id_propiedad, $id_propietario, $tipo_propiedad, $ubicacion, $habitaciones, $metros_cuadrados);
             header('Location: ' . BASE_URL . 'propiedades');
             exit();
+        } else {
+            $propiedad = $this->modelo->obtenerPropiedadPorId($id_propiedad);
+            $propietarios = $this->modelo->obtenerPropietarios(); 
+            $this->vista->forumularioEditarPropiedad($propiedad, $propietarios);
         }
     }
-
 
     public function eliminarPropiedad() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

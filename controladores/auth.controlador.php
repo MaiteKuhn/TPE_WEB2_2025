@@ -1,12 +1,11 @@
 <?php
-require_once './modelo/auth.model.php';
+require_once './modelos/auth.model.php';
 require_once './vistas/auth.vista.php';
 
 class AuthController {
     private $modelo;
     private $vista;
 
-        // TODO: implementar formulario de login
     function __construct() {
         $this->modelo = new ModeloAuth();
         $this->vista = new VistaAuth();
@@ -26,7 +25,7 @@ class AuthController {
 
         $userFromDB = $this->modelo->getByUser($user);
 
-        if($userFromDB && password_verify($password, $userFromDB->contraseña)) {
+        if($userFromDB && password_verify($password, $userFromDB->password)) {
             $_SESSION['USER_ID'] = $userFromDB->id;
             $_SESSION['USER_NAME'] = $userFromDB->usuario;
             header("Location: ".BASE_URL."listar");
