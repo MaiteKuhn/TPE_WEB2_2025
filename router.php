@@ -16,4 +16,12 @@ switch ($params[0]) {
     case 'home':
         # code...
         break;
+    case 'propietarios':
+        $controladorPropietarios = new ControladorPropietario();
+        $controladorPropietarios->mostrarPropietarios();
+        break;
+    case 'propiedadesPropietario':
+        $controladorPropietarios = new ControladorPropietario();
+        $controladorPropietarios->mostrarPropiedadesPropietario();
+        break;
 }

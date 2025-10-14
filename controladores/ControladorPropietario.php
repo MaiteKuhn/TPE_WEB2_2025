@@ -16,7 +16,7 @@ class ControladorPropietario {
         $this->vista->mostrarPropietarios($propietarios);
     }
 
-    public function mostrarPropiedades($id_propietario){//de uno especifico
+    public function mostrarPropiedadesPropietario($id_propietario){//de uno especifico
         $propiedades = $this->modelo->obtenerPropiedadesPorPropietario($id_propietario);
         $propietario = $this->modelo->obtenerPropietarioPorId($id_propietario);
         $this->vista->mostrarPropiedadesPorPropietario($propietario, $propiedades);
