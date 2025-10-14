@@ -1,5 +1,5 @@
 <?php
-class VistasPropietario {
+class VistasPropietario {//el que me quiero enfocar en hacer ahora
     public function __construct() {}
 }
 //listado propietarios
