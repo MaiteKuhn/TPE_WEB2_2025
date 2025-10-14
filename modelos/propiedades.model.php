@@ -13,11 +13,17 @@ class ModeloPropiedades {
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function obtenerPropietarioPorId($id_propietario) {
+        $query = $this->db->prepare("SELECT nombre FROM propietarios WHERE id_propietario = ?");
+        $query->execute([$id_propietario]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
     public function obtenerPropietarios() {
-    $query = $this->db->prepare("SELECT id_propietario, nombre FROM propietarios");
-    $query->execute();
-    return $query->fetchAll(PDO::FETCH_OBJ);
-}
+        $query = $this->db->prepare("SELECT id_propietario, nombre FROM propietarios");
+        $query->execute();
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
 
     public function obtenerPropiedadPorId($id_propiedad) {
         $query = $this->db->prepare('SELECT * FROM propiedades WHERE id_propiedad = ?');

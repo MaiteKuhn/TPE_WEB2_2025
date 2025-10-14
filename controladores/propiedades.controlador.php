@@ -20,7 +20,8 @@ class ControladorPropiedades {
     public function mostrarPropiedadPorId($id_propiedad) {
         $propiedad = $this->modelo->obtenerPropiedadPorId($id_propiedad);
         if ($propiedad) {
-            $this->vista->mostrarPropiedadPorId($propiedad);
+            $propietario = $this->modelo->obtenerPropietarioPorId($propiedad->id_propietario_fk);
+            $this->vista->mostrarPropiedadPorId($propiedad, $propietario);
         } else {
             $this->vista->mostrarErrorEditar($id_propiedad);
         }

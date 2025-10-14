@@ -5,7 +5,7 @@ class VistaPropiedades {
     public function mostrarPropiedades($propiedades, $usuario = null) {
         require './templates/listar_propiedades.phtml';
     }
-    public function mostrarPropiedadPorId($propiedad){
+    public function mostrarPropiedadPorId($propiedad, $propietario){
          require_once './templates/mostrar_propiedad.phtml';
     }
 
