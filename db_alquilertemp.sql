@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-09-2025 a las 04:04:45
+-- Tiempo de generación: 14-10-2025 a las 04:45:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_alquilertemptandil`
+-- Base de datos: `db_alquilertemp`
 --
 
 -- --------------------------------------------------------
@@ -41,8 +41,8 @@ CREATE TABLE `propiedades` (
 --
 
 INSERT INTO `propiedades` (`id_propiedad`, `id_propietario_fk`, `tipo_propiedad`, `ubicacion`, `habitaciones`, `metros_cuadrados`) VALUES
-(1, 1, 'casa', '14 de julio y belgrano', 2, 50),
-(2, 1, 'depto', '25 de mayo n254', 1, 20);
+(4, 1, 'Casa', 'Pueyrredon 28', 3, 35),
+(5, 2, 'DUPLEX', 'Chacabuco 156', 1, 20);
 
 -- --------------------------------------------------------
 
@@ -67,6 +67,27 @@ INSERT INTO `propietarios` (`id_propietario`, `id_propiedad`, `nombre`, `telefon
 (2, 3, 'Pilar costa bauer', 1875, 'ouefhbi'),
 (3, 3, 'Pilar costa bauer', 1875, 'ouefhbi');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL,
+  `usuario` text NOT NULL,
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `usuario`, `password`) VALUES
+(1, 'webadmin', 'admin'),
+(2, 'Maite', 'maikuhn'),
+(3, 'Pilar', 'pilicosta');
+
 --
 -- Índices para tablas volcadas
 --
@@ -85,6 +106,12 @@ ALTER TABLE `propietarios`
   ADD PRIMARY KEY (`id_propietario`);
 
 --
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id_usuario`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -92,13 +119,19 @@ ALTER TABLE `propietarios`
 -- AUTO_INCREMENT de la tabla `propiedades`
 --
 ALTER TABLE `propiedades`
-  MODIFY `id_propiedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_propiedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `propietarios`
 --
 ALTER TABLE `propietarios`
   MODIFY `id_propietario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

@@ -1,0 +1,89 @@
+<?php require 'templates/header.phtml' ?>
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+<style>
+    .agregar-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 60vh;
+    }
+    .agregar-form {
+        background: #fff;
+        border: 1.5px solid #0033a0;
+        border-radius: 8px;
+        padding: 32px 28px 24px 28px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        min-width: 320px;
+        max-width: 400px;
+        font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .agregar-form label {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 600;
+        color: #0033a0;
+    }
+    .agregar-form input[type="text"],
+    .agregar-form input[type="number"],
+    .agregar-form select {
+        font-family: 'Montserrat', Arial, sans-serif;
+        border: 1.5px solid #0033a0;
+        border-radius: 5px;
+        padding: 8px 10px;
+        margin-bottom: 16px;
+        width: 100%;
+        font-size: 1rem;
+    }
+    .agregar-form button[type="submit"] {
+        font-family: 'Montserrat', Arial, sans-serif;
+        background: #0033a0;
+        color: #fff;
+        border: 2px solid #0033a0;
+        border-radius: 5px;
+        padding: 8px 18px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: background 0.2s, color 0.2s;
+    }
+    .agregar-form button[type="submit"]:hover {
+        background: #fff;
+        color: #0033a0;
+    }
+</style>
+
+<div class="agregar-container">
+    <h2 style="font-family: 'Montserrat', Arial, sans-serif; color: #d32f2f; margin-bottom: 18px;">Agregar una propiedad</h2>
+    <form action="<?= BASE_URL ?>agregarPropiedad" method="POST" class="agregar-form">
+        <div class="form-group">
+            <label for="id_propietario_fk">Propietario</label>
+            <select id="id_propietario_fk" name="id_propietario_fk" required>
+                <option value="">Seleccione un propietario</option>
+                <?php foreach($propietarios as $propietario): ?>
+                    <option value="<?= $propietario->id_propietario ?>">
+                        <?= htmlspecialchars($propietario->nombre) ?>
+                    </option>
+    <?php endforeach; ?>
+</select>
+        </div>
+        <div class="form-group">
+            <label for="tipo_propiedad">Tipo de propiedad</label>
+            <input type="text" id="tipo_propiedad" name="tipo_propiedad" required>
+        </div>
+        <div class="form-group">
+            <label for="ubicacion">Ubicación</label>
+            <input type="text" id="ubicacion" name="ubicacion" required>
+        </div>
+        <div class="form-group">
+            <label for="habitaciones">Cantidad de habitaciones</label>
+            <input type="number" id="habitaciones" name="habitaciones" required>
+        </div>
+        <div class="form-group">
+            <label for="metros_cuadrados">Metros cuadrados de la propiedad</label>
+            <input type="number" id="metros_cuadrados" name="metros_cuadrados" required>
+        </div>
+        <button type="submit">Agregar</button>
+    </form>
+</div>
+
+<?php require 'templates/footer.phtml' ?>
