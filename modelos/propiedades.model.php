@@ -19,10 +19,10 @@ class ModeloPropiedades {
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    public function obtenerPropietarios() {
+   public function obtenerPropietarios() {
         $query = $this->db->prepare("SELECT id_propietario, nombre FROM propietarios");
         $query->execute();
-        return $query->fetch(PDO::FETCH_OBJ);
+        return $query->fetchAll(PDO::FETCH_OBJ); 
     }
 
     public function obtenerPropiedadPorId($id_propiedad) {
