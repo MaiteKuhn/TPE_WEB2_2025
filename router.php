@@ -39,10 +39,6 @@ switch ($params[0]) {
             echo "Propietario no encontrado";
         }
         break;
-    case 'propiedadesPropietario':
-        $controladorPropietarios = new ControladorPropietario();
-        $controladorPropietarios->mostrarPropiedadesPropietario();
-        break;
     case 'login':
         $controlador = new AuthController();
         $controlador->showLogin($request);
