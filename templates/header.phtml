@@ -1,13 +1,25 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
 <header style="background: #fff; color: #d32f2f; padding: 20px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1.5px solid #d32f2f;">
-	<div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-		<h1 style="margin: 0; font-size: 2.2rem; font-weight: bold; letter-spacing: 2px; color: #d32f2f; font-family: 'Montserrat', Arial, sans-serif; text-align: left; flex: 1;">
-			ALQUILERES TEMPORARIOS TANDIL
-		</h1>
-		<nav style="display: flex; gap: 10px; justify-content: flex-end; align-items: center; flex: 1;">
-			<a href="/TPE_WEB2_2025/router.php" style="color: #fff; background: #0033a0; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: 600; border: 2px solid #0033a0; transition: background 0.2s, color 0.2s; font-family: 'Montserrat', Arial, sans-serif;">Home</a>
-			<a href="/TPE_WEB2_2025/router.php?action=propiedades" style="color: #fff; background: #0033a0; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: 600; border: 2px solid #0033a0; transition: background 0.2s, color 0.2s; font-family: 'Montserrat', Arial, sans-serif;">Propiedades</a>
-			<a href="/TPE_WEB2_2025/router.php?action=propietarios" style="color: #fff; background: #0033a0; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: 600; border: 2px solid #0033a0; transition: background 0.2s, color 0.2s; font-family: 'Montserrat', Arial, sans-serif;">Propietarios</a>
-		</nav>
-	</div>
+    <div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        <h1 style="margin: 0; font-size: 2.2rem; font-weight: bold; letter-spacing: 2px; color: #d32f2f; font-family: 'Montserrat', Arial, sans-serif; text-align: left; flex: 1;">
+            ALQUILERES TEMPORARIOS TANDIL
+        </h1>
+        <nav style="display: flex; gap: 10px; justify-content: flex-end; align-items: center; flex: 1;">
+            <a href="/TPE_WEB2_2025/router.php" style="color: #fff; background: #0033a0; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: 600; border: 2px solid #0033a0; transition: background 0.2s, color 0.2s; font-family: 'Montserrat', Arial, sans-serif;">Home</a>
+            <a href="/TPE_WEB2_2025/router.php?action=propiedades" style="color: #fff; background: #0033a0; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: 600; border: 2px solid #0033a0; transition: background 0.2s, color 0.2s; font-family: 'Montserrat', Arial, sans-serif;">Propiedades</a>
+            <a href="/TPE_WEB2_2025/router.php?action=propietarios" style="color: #fff; background: #0033a0; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: 600; border: 2px solid #0033a0; transition: background 0.2s, color 0.2s; font-family: 'Montserrat', Arial, sans-serif;">Propietarios</a>
+
+            <?php if (!isset($_SESSION['USER_ID'])): ?>
+                <a href="/TPE_WEB2_2025/router.php?action=login" style="color: #fff; background: #0033a0; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: 600; border: 2px solid #0033a0; font-family: 'Montserrat', Arial, sans-serif;">Login</a>
+            <?php else: ?>
+                <a href="/TPE_WEB2_2025/router.php?action=logout" style="color: #fff; background: #d32f2f; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: 600; border: 2px solid #d32f2f; font-family: 'Montserrat', Arial, sans-serif;">Logout</a>
+            <?php endif; ?>
+        </nav>
+    </div>
 </header>
+

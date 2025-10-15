@@ -9,14 +9,7 @@ require_once './middleware/session.middleware.php';
 require_once './middleware/guard.middleware.php';
 
 session_start();
-
-
-
-
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
-
-
-
 $request = new StdClass();
 $request = (new SessionMiddleware())->run($request);
 
@@ -35,7 +28,16 @@ switch ($params[0]) {
         break;
     case 'propietarios':
         $controladorPropietarios = new ControladorPropietario();
-        $controladorPropietarios->mostrarPropietarios();
+        $controladorPropietarios->mostrarPropietarios($request);
+        break;
+    case 'detallePropietario':
+        $controladorPropietarios = new ControladorPropietario();
+        $id = $params[1] ?? null;
+        if ($id) {
+            $controladorPropietarios->mostrarPropietarioPorId($id);
+        } else {
+            echo "Propietario no encontrado";
+        }
         break;
     case 'propiedadesPropietario':
         $controladorPropietarios = new ControladorPropietario();
@@ -48,6 +50,10 @@ switch ($params[0]) {
     case 'do_login':
         $controlador = new AuthController();
         $controlador->doLogin($request);
+        break;
+    case 'logout':
+        $controlador = new AuthController();
+        $controlador->logout();
         break;
     case 'propiedades':
         $controlador = new ControladorPropiedades();
@@ -81,6 +87,31 @@ switch ($params[0]) {
             $controlador->eliminarPropiedad($id);
         } else {
             echo "ID de propiedad no proporcionado";
+        }
+        break;
+    case 'agregarPropietario':
+        $request = (new GuardMiddleware())->run($request); // solo usuarios logueados
+        $controladorPropietarios = new ControladorPropietario();
+        $controladorPropietarios->agregarPropietario();
+        break;
+    case 'editarPropietario':
+        $request = (new GuardMiddleware())->run($request); // solo usuarios logueados
+        $controladorPropietarios = new ControladorPropietario();
+        $id = $params[1] ?? null;
+        if ($id) {
+            $controladorPropietarios->editarPropietario($id);
+        } else {
+            echo "Propietario no encontrado";
+        }
+        break;
+    case 'eliminarPropietario':
+        $request = (new GuardMiddleware())->run($request); // solo usuarios logueados
+        $controladorPropietarios = new ControladorPropietario();
+        $id = $params[1] ?? null;
+        if ($id) {
+            $controladorPropietarios->eliminarPropietario($id);
+        } else {
+            echo "Propietario no encontrado";
         }
         break;
     default:

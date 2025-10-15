@@ -8,7 +8,7 @@ class ModeloPropietario {
     }
 
     public function obtenerPropietarios() {
-        $query = $this->db->prepare('SELECT * FROM propietarios');
+        $query = $this->db->prepare('SELECT id_propietario, nombre, telefono, mail FROM propietarios');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
@@ -25,7 +25,7 @@ class ModeloPropietario {
     }
 
     public function editarPropietario($id_propietario, $nombre, $telefono, $mail) {
-        $query = $this->db->prepare('UPDATE propietarios SET nombre = ?, telefono = ?, email = ? WHERE id_propietario = ?');
+        $query = $this->db->prepare('UPDATE propietarios SET nombre = ?, telefono = ?, mail = ? WHERE id_propietario = ?');
         $query->execute([$nombre, $telefono, $mail, $id_propietario]);
     }
 
@@ -35,12 +35,12 @@ class ModeloPropietario {
     }
 
     public function contarPropiedadesPorPropietario($id_propietario) {
-        $query = $this->db->prepare('SELECT COUNT(*) AS total FROM propiedades WHERE id_propietario_dk = ?');
+        $query = $this->db->prepare('SELECT COUNT(*) AS total FROM propiedades WHERE id_propietario_fk = ?');
         $query->execute([$id_propietario]);
         $result = $query->fetch(PDO::FETCH_OBJ);
         return $result->total;
     }
-   
+
     public function obtenerPropiedadesPorPropietario($id_propietario) {
         $query = $this->db->prepare('SELECT * FROM propiedades WHERE id_propietario_fk = ?');
         $query->execute([$id_propietario]);

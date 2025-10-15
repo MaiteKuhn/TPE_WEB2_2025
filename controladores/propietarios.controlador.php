@@ -11,9 +11,10 @@ class ControladorPropietario {
         $this->vista = new VistasPropietario(); 
     }
 
-    public function mostrarPropietarios() {
+    public function mostrarPropietarios($request = null) {
         $propietarios = $this->modelo->obtenerPropietarios();
-        $this->vista->mostrarPropietarios($propietarios);
+        $usuario = $request->user ?? null;
+        $this->vista->mostrarPropietarios($propietarios, $usuario);
     }
 
     public function mostrarPropiedadesPropietario($id_propietario){//de uno especifico
@@ -22,51 +23,63 @@ class ControladorPropietario {
         $this->vista->mostrarPropiedadesPorPropietario($propietario, $propiedades);
     }
 
-    public function agregarPropietario() {
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nombre = $_POST['nombre'];
-            $telefono = $_POST['telefono'];
-            $mail = $_POST['mail'];
-            $this->modelo->agregarPropietario($nombre, $telefono,$mail);
-            header('Location: ' . BASE_URL . 'propietarios');
-            exit();
+    public function mostrarPropietarioPorId($id_propietario) {
+        $propietario = $this->modelo->obtenerPropietarioPorId($id_propietario);
+        if ($propietario) {
+            $propiedades = $this->modelo->obtenerPropiedadesPorPropietario($id_propietario);
+            $this->vista->mostrarPropietarioPorId($propietario, $propiedades);
         } else {
-            $this->vista->mostrarFormularioAgregarPropietario();
+            $this->vista->mostrarErrorEditar($id_propietario);
         }
     }
 
-    public function mostrarForumularioEditarPropietario($id_propietario) {
-        $propietario = $this->modelo->obtenerPropietarioPorId($id_propietario);
-        if($propietario) {
-            $this->vista->mostrarForumularioEditarPropietario($propietario);
+    public function agregarPropietario() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nombre = $_POST['nombre'];
+            $telefono = $_POST['telefono'];
+            $mail = $_POST['mail']; 
+            $this->modelo->agregarPropietario($nombre, $telefono, $mail);
+            header('Location: ' . BASE_URL . 'propietarios');
+            exit();
         } else {
-            $this->vista->mostrarError("No se encontro propietario con el ID: " . $id_propietario);
+            $this->vista->formularioAgregarPropietario();
+        }
+    }
+
+    public function mostrarFormularioEditarPropietario($id_propietario) {
+        $propietario = $this->modelo->obtenerPropietarioPorId($id_propietario);
+        if ($propietario) {
+            $this->vista->formularioEditarPropietario($propietario);
+        } else {
+            $this->vista->mostrarErrorEditar($id_propietario);
         }
     }
 
     public function editarPropietario($id_propietario) {
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nombre = $_POST['nombre'];
             $telefono = $_POST['telefono'];
             $mail = $_POST['mail'];
             $this->modelo->editarPropietario($id_propietario, $nombre, $telefono, $mail);
             header('Location: ' . BASE_URL . 'propietarios');
             exit();
+        } else {
+            $this->mostrarFormularioEditarPropietario($id_propietario);
         }
     }
 
-    // Eliminar propietario (solo si no tiene propiedades asociadas)
-    public function eliminarPropietario() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_propietario'])) {
-            $id_propietario = $_POST['id_propietario'];
+    public function eliminarPropietario($id_propietario) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $totalPropiedades = $this->modelo->contarPropiedadesPorPropietario($id_propietario);
-            if($totalPropiedades == 0) {
+            if ($totalPropiedades == 0) {
                 $this->modelo->eliminarPropietario($id_propietario);
                 header('Location:' . BASE_URL . 'propietarios');
                 exit();
             } else {
-                $this->vista->mostrarError("No se puede eliminar el propietario porque tiene propiedades asociadas");
+                $this->vista->mostrarErrorEliminar();
             }
+        } else {
+            $this->vista->mostrarErrorEliminar();
         }
     }
 }
