@@ -24,14 +24,18 @@ class AuthController {
         $usuario = $_POST['usuario'];
         $password = $_POST['password'];
 
+        
+
         $userFromDB = $this->modelo->getByUser($usuario);
 
-        if ($userFromDB && $password === $userFromDB->password) {
-            // Guardar datos en sesión con el nombre correcto de la columna
-            $_SESSION['USER_ID'] = $userFromDB->id_usuario; // <-- fijate el nombre real
+        var_dump($password);
+        var_dump($userFromDB->password);
+
+        if ( $userFromDB && password_verify($password, $userFromDB->password)) { //password_verify($password, $userFromDB->password)
+        
+            $_SESSION['USER_ID'] = $userFromDB->id_usuario; 
             $_SESSION['USER_NAME'] = $userFromDB->usuario;
 
-            // Redirigir a propiedades
             header("Location: " . BASE_URL . "propiedades");
             exit();
         } else {

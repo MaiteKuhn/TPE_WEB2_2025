@@ -18,12 +18,9 @@ class VistaPropiedades {
          require_once './templates/form_editar_propiedad.phtml';
     }
 
-    public function mostrarErrorEditar( $id_propiedad){
-        echo "<h2>No se encontro propiedad con el ID: " . $id_propiedad . "</h2>";
+    public function mostrarError($mensaje){
+        echo "<p> Error: $mensaje </error>";
     }
-
-    public function mostrarErrorEliminar(){
-        echo "<h2>No se pudo eliminar la propiedad</h2>";
-    }
+    
 
 }

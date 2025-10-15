@@ -37,12 +37,13 @@ class ModeloPropiedades {
     }
 
    public function editarPropiedad($id_propiedad, $id_propietario, $tipo_propiedad, $ubicacion, $habitaciones, $metros_cuadrados) {
-    $query = $this->db->prepare('UPDATE propiedades SET id_propietario_fk = ?, tipo_propiedad = ?, ubicacion = ?, habitaciones = ?, metros_cuadrados = ? WHERE id_propiedad = ?');
-    $query->execute([$id_propietario, $tipo_propiedad, $ubicacion, $habitaciones, $metros_cuadrados, $id_propiedad]);
-}
+            $query = $this->db->prepare('UPDATE propiedades SET id_propietario_fk = ?, tipo_propiedad = ?, ubicacion = ?, habitaciones = ?, metros_cuadrados = ? WHERE id_propiedad = ?');
+            $query->execute([$id_propietario, $tipo_propiedad, $ubicacion, $habitaciones, $metros_cuadrados, $id_propiedad]);
+   }
 
     public function eliminarPropiedad($id_propiedad) {
         $query = $this->db->prepare('DELETE FROM propiedades WHERE id_propiedad = ?');
         $query->execute([$id_propiedad]);
     }
-}
+ 
+   }

@@ -22,11 +22,11 @@
         </div>
         <div class="form-group">
             <label for="habitaciones">Cantidad de habitaciones</label>
-            <input type="number" id="habitaciones" name="habitaciones" value="<?= $propiedad->habitaciones ?>" required>
+            <input type="number" id="habitaciones" name="habitaciones" min="1" max="10" value="<?= $propiedad->habitaciones ?>" required>
         </div>
         <div class="form-group">
             <label for="metros_cuadrados">Metros cuadrados</label>
-            <input type="number" id="metros_cuadrados" name="metros_cuadrados" value="<?= $propiedad->metros_cuadrados ?>" required>
+            <input type="number" id="metros_cuadrados" name="metros_cuadrados" min="1" value="<?= $propiedad->metros_cuadrados ?>" required>
         </div>
         <button type="submit">Editar</button>
         <a href="<?= BASE_URL ?>propiedades" class="btn-cancelar">Cancelar</a>
