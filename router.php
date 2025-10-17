@@ -7,6 +7,7 @@ require_once './controladores/propiedades.controlador.php';
 require_once './modelos/propiedades.model.php';
 require_once './middleware/session.middleware.php';
 require_once './middleware/guard.middleware.php';
+require_once './vistas/propietarios.vistas.php';
 
 session_start();
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
@@ -35,8 +36,6 @@ switch ($params[0]) {
         $id = $params[1] ?? null;
         if ($id) {
             $controladorPropietarios->mostrarPropietarioPorId($id);
-        } else {
-            echo "Propietario no encontrado";
         }
         break;
     case 'login':
@@ -86,31 +85,33 @@ switch ($params[0]) {
         }
         break;
     case 'agregarPropietario':
-        $request = (new GuardMiddleware())->run($request); // solo usuarios logueados
+        $request = (new GuardMiddleware())->run($request); 
         $controladorPropietarios = new ControladorPropietario();
         $controladorPropietarios->agregarPropietario();
         break;
     case 'editarPropietario':
-        $request = (new GuardMiddleware())->run($request); // solo usuarios logueados
+        $request = (new GuardMiddleware())->run($request); 
         $controladorPropietarios = new ControladorPropietario();
         $id = $params[1] ?? null;
         if ($id) {
             $controladorPropietarios->editarPropietario($id);
         } else {
-            echo "Propietario no encontrado";
+            $vista = new VistasPropietario();
+            $vista->mostrarError('No se proporcionó un ID de propietario válido.');
         }
         break;
     case 'eliminarPropietario':
-        $request = (new GuardMiddleware())->run($request); // solo usuarios logueados
+        $request = (new GuardMiddleware())->run($request); 
         $controladorPropietarios = new ControladorPropietario();
         $id = $params[1] ?? null;
         if ($id) {
             $controladorPropietarios->eliminarPropietario($id);
         } else {
-            echo "Propietario no encontrado";
+            $vista = new VistasPropietario();
+            $vista->mostrarError('No se proporcionó un ID de propietario válido.');
         }
         break;
     default:
-            echo "Página no encontrada";
-            break;
+        echo "Página no encontrada";
+        break;
 }

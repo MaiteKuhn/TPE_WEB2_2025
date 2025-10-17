@@ -23,12 +23,24 @@ class ControladorPropietario {
             $propiedades = $this->modelo->obtenerPropiedadesPorPropietario($id_propietario);
             $this->vista->mostrarPropietarioPorId($propietario, $propiedades);
         } else {
-            $this->vista->mostrarErrorEditar($id_propietario);
+            $this->vista->mostrarError("No se encontró el propietario con ID $id_propietario");
         }
     }
 
     public function agregarPropietario() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
+                $this->vista->mostrarError('Debe ingresar el nombre del propietario');
+                return;
+            }
+            if (!isset($_POST['telefono']) || empty($_POST['telefono'])) {
+                $this->vista->mostrarError('Debe ingresar un teléfono válido');
+                return;
+            }
+            if (!isset($_POST['mail']) || empty($_POST['mail'])) {
+                $this->vista->mostrarError('Debe ingresar un correo electrónico');
+                return;
+            }
             $nombre = $_POST['nombre'];
             $telefono = $_POST['telefono'];
             $mail = $_POST['mail']; 
@@ -45,12 +57,24 @@ class ControladorPropietario {
         if ($propietario) {
             $this->vista->formularioEditarPropietario($propietario);
         } else {
-            $this->vista->mostrarErrorEditar($id_propietario);
+            $this->vista->mostrarError("No se encontró el propietario a editar (ID $id_propietario)");
         }
     }
 
     public function editarPropietario($id_propietario) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
+                $this->vista->mostrarError('Debe ingresar el nombre del propietario');
+                return;
+            }
+            if (!isset($_POST['telefono']) || empty($_POST['telefono'])) {
+                $this->vista->mostrarError('Debe ingresar un teléfono válido');
+                return;
+            }
+            if (!isset($_POST['mail']) || empty($_POST['mail'])) {
+                $this->vista->mostrarError('Debe ingresar un correo electrónico');
+                return;
+            }
             $nombre = $_POST['nombre'];
             $telefono = $_POST['telefono'];
             $mail = $_POST['mail'];
@@ -70,10 +94,10 @@ class ControladorPropietario {
                 header('Location:' . BASE_URL . 'propietarios');
                 exit();
             } else {
-                $this->vista->mostrarErrorEliminar();
+                $this->vista->mostrarError('No se puede eliminar el propietario porque tiene propiedades asociadas.');
             }
         } else {
-            $this->vista->mostrarErrorEliminar();
+            $this->vista->mostrarError("Acción inválida. No se pudo eliminar el propietario.");
         }
     }
 }

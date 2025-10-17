@@ -18,11 +18,8 @@ class VistasPropietario {
         require './templates/form_editar_propietario.phtml';
     }
 
-    public function mostrarErrorEditar($id_propietario) {
-        echo "<h2>No se encontró propietario con el ID: " . $id_propietario . "</h2>";
-    }
-
-    public function mostrarErrorEliminar() {
-        echo "<h2>No se pudo eliminar el propietario</h2>";
+    public function mostrarError($mensaje) {
+        $error = $mensaje; 
+        require './templates/mostrarError.phtml';
     }
 }
