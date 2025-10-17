@@ -36,6 +36,9 @@ switch ($params[0]) {
         $id = $params[1] ?? null;
         if ($id) {
             $controladorPropietarios->mostrarPropietarioPorId($id);
+        } else {
+            $vista = new VistasPropietario();
+            $vista->mostrarError('No se proporcionó un ID de propietario válido.');
         }
         break;
     case 'login':
