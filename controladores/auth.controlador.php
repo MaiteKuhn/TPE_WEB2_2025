@@ -28,9 +28,6 @@ class AuthController {
 
         $userFromDB = $this->modelo->getByUser($usuario);
 
-        var_dump($password);
-        var_dump($userFromDB->password);
-
         if ( $userFromDB && password_verify($password, $userFromDB->password)) { //password_verify($password, $userFromDB->password)
         
             $_SESSION['USER_ID'] = $userFromDB->id_usuario; 
@@ -39,7 +36,6 @@ class AuthController {
             header("Location: " . BASE_URL . "propiedades");
             exit();
         } else {
-            // Login incorrecto
             $this->vista->mostrarLogin("Usuario o contraseña incorrecta", $request->user);
         }
     }
