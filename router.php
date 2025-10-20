@@ -1,4 +1,5 @@
 <?php
+require_once './src/Model.php';
 require_once './controladores/propietarios.controlador.php';
 require_once './modelos/propietarios.model.php';
 require_once './controladores/auth.controlador.php';
@@ -9,6 +10,7 @@ require_once './middleware/session.middleware.php';
 require_once './middleware/guard.middleware.php';
 require_once './vistas/propietarios.vistas.php';
 
+$model = new Model();
 session_start();
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 $request = new StdClass();
