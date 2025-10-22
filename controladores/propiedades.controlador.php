@@ -23,7 +23,7 @@ class ControladorPropiedades {
             $propietario = $this->modelo->obtenerPropietarioPorId($propiedad->id_propietario_fk);
             $this->vista->mostrarPropiedadPorId($propiedad, $propietario);
         } else {
-            $this->vista->mostrarError("No se puede mostrar la propiedad");
+            $this->vista->mostrarError("No se encontró la propiedad con el ID $id_propiedad");
         }
     }
 

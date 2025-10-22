@@ -18,8 +18,9 @@ class VistaPropiedades {
          require_once './templates/form_editar_propiedad.phtml';
     }
 
-    public function mostrarError($mensaje){
-        echo "<p> Error: $mensaje </error>";
+    public function mostrarError($mensaje) {
+        $error = $mensaje; 
+        require './templates/mostrarError.phtml';
     }
     
 
